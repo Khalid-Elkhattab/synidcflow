@@ -10,12 +10,18 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Enums\UserRole;
 
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request): JsonResponse
     {
-        $user = User::create($request->validated());
+        $user = User::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+            'role'=>UserRole::Resident,
+        ]);
         $token = $user->createToken('auth-token')->plainTextToken;
 
         return response()->json([
