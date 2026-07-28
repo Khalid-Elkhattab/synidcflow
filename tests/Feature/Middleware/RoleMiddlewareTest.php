@@ -1,8 +1,10 @@
 <?php
+
 use App\Enums\UserRole;
 use App\Models\User;
-use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
+
 uses(RefreshDatabase::class);
 
 test('un visiteur non authentifié ne peut pas accéder à la route admin', function () {
