@@ -6,7 +6,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 class EnsureUserHasRole
 {
     /**
@@ -14,16 +13,17 @@ class EnsureUserHasRole
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next,string ...$roles): Response
+    public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        $user=$request->user();
-        if (!$user || ! in_array($user->role->value,$roles ,true)){
+        $user = $request->user();
+        if (! $user || ! in_array($user->role->value, $roles, true)) {
             return response()->json([
-                'success'=>'false',
-                'message'=> 'Vous n’êtes pas autorisé à accéder à cette ressource.',
-                 'data'=> null,
-            ],403);
+                'success' => 'false',
+                'message' => 'Vous n’êtes pas autorisé à accéder à cette ressource.',
+                'data' => null,
+            ], 403);
         }
-         return $next($request);
+
+        return $next($request);
     }
 }

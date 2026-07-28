@@ -15,27 +15,27 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        $user=$request->user();
-        if (! $user){
+        $user = $request->user();
+        if (! $user) {
             return response()->json([
-                'success'  => false,
+                'success' => false,
                 'message' => 'Unauthenticated.',
 
-            ],401);
+            ], 401);
         }
 
         $userRole = $user->role instanceof \BackedEnum
         ? $user->role->value
         : $user->role;
 
-        
         if (! in_array($userRole, $roles, true)) {
-         return response()->json([
-            'success'  => false,
-            'message' => 'Vous navez pas lautorisation nécessaire.',
-         ],403);
+            return response()->json([
+                'success' => false,
+                'message' => 'Vous navez pas lautorisation nécessaire.',
+            ], 403);
 
         }
+
         return $next($request);
     }
 }
