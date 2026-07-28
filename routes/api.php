@@ -22,12 +22,12 @@ Route::prefix('v1')->group(function (): void {
         Route::get('/me', [AuthController::class, 'me']);
         Route::post('/logout', [AuthController::class, 'logout']);
     });
-    Route::middleware(['auth:sanctum', 'role:admin'])->group(function (): void {
-    Route::get('/admin/test', function () {
+    Route::middleware(['auth:sanctum', 'role:admin'])->get('/admin-only',function() {
+
         return response()->json([
             'success' => true,
             'message' => 'Accès administrateur autorisé.',
         ]);
     });
 });
-});
+
