@@ -31,7 +31,7 @@ class RoleMiddleware
         if (! in_array($userRole, $roles, true)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Vous navez pas lautorisation nécessaire.',
+                'message' => "Vous n'avez pas l'autorisation nécessaire.",
             ], 403);
 
         }

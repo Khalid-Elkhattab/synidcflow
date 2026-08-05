@@ -5,13 +5,14 @@ namespace App\Models;
 use App\Enums\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -36,6 +37,16 @@ class User extends Authenticatable
 
     public function residences(): HasMany
     {
-        return $this->HasMany(Residence::class, 'syndic_id');
+        return $this->hasMany(Residence::class, 'syndic_id');
+    }
+
+    public function appartements(): HasMany
+    {
+        return $this->hasMany(Appartement::class, 'resident_id');
+    }
+
+    public function reclamations(): HasMany
+    {
+        return $this->hasMany(Reclamation::class, 'resident_id');
     }
 }

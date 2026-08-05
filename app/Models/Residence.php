@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Residence extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = [
         'syndic_id',
         'name',
@@ -18,6 +22,11 @@ class Residence extends Model
 
     public function syndic(): BelongsTo
     {
-        return $this->BelongsTo(User::class, 'syndic_id');
+        return $this->belongsTo(User::class, 'syndic_id');
+    }
+
+    public function immeubles(): HasMany
+    {
+        return $this->hasMany(Immeuble::class);
     }
 }

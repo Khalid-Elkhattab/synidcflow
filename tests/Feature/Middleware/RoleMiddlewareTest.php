@@ -29,7 +29,7 @@ test('un résident ne peut pas accéder à la route admin', function () {
         ->assertForbidden()
         ->assertJson([
             'success' => false,
-            'message' => 'Vous navez pas lautorisation nécessaire.',
+            'message' => "Vous n'avez pas l'autorisation nécessaire.",
         ]);
 });
 test('un administrateur peut accéder à la route admin', function () {
