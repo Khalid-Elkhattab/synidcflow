@@ -1,9 +1,9 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { RequireAuth, RequireGuest, RequireRole, homeFor } from './components/guards';
-import { useAuth } from './context/AuthContext';
+import { Route, Routes } from 'react-router-dom';
+import { RequireAuth, RequireGuest, RequireRole } from './components/guards';
 import Layout from './components/Layout';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import Landing from './pages/Landing';
 import NotFound from './pages/NotFound';
 
 import AdminDashboard from './pages/admin/Dashboard';
@@ -34,6 +34,7 @@ const ROLES_WRAP = {
 export default function App() {
     return (
         <Routes>
+            <Route path="/" element={<RequireGuest><Landing /></RequireGuest>} />
             <Route path="/login" element={<RequireGuest><Login /></RequireGuest>} />
             <Route path="/register" element={<RequireGuest><Register /></RequireGuest>} />
 
@@ -58,14 +59,7 @@ export default function App() {
                 <Route path="/resident/reclamations" element={<RequireRole roles={ROLES_WRAP.resident}><ResidentReclamations /></RequireRole>} />
             </Route>
 
-            <Route path="/" element={<RootRedirect />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );
-}
-
-function RootRedirect() {
-    // Handled client-side after auth loads (protected via Layout). If guest, go to login.
-    const { user } = useAuth();
-    return <Navigate to={user ? homeFor(user.role) : '/login'} replace />;
 }
