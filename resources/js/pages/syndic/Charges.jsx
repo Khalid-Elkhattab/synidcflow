@@ -11,12 +11,13 @@ import Spinner from '../../components/Spinner';
 import { formatDate, CHARGE_STATUT } from '../../lib/labels';
 import { useAuth } from '../../context/AuthContext';
 
-function InputFile({ label, onChange, accept, required }) {
+function InputFile({ label, name, onChange, accept, required }) {
     return (
         <label className="block">
             {label && <span className="mb-1 block text-sm font-medium text-gray-700">{label}</span>}
             <input
                 type="file"
+                name={name}
                 accept={accept}
                 required={required}
                 onChange={onChange}
@@ -274,7 +275,7 @@ export default function SyndicCharges() {
             <Modal open={recuOpen} onClose={() => setRecuOpen(false)} title="Ajouter un reçu">
                 <div className="space-y-4">
                     {recuError && <Alert type="error">{recuError}</Alert>}
-                    <InputFile label="Fichier (JPG/PNG, max 2 Mo)" accept="image/*" required onChange={handleRecuChange} />
+                    <InputFile label="Fichier (JPG/PNG, max 10 Mo)" name="fichier" accept="image/*" required onChange={handleRecuChange} />
                     <div className="grid grid-cols-2 gap-4">
                         <Input label="Date de paiement" type="date" name="date_paiement" value={recuForm.date_paiement} onChange={handleRecuChange} />
                         <Input label="Montant payé (€)" type="number" step="0.01" min={0} name="montant_paye" value={recuForm.montant_paye} onChange={handleRecuChange} />
