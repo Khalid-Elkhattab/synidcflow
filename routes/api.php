@@ -38,9 +38,11 @@ Route::prefix('v1')->group(function (): void {
             ]);
         });
 
-        Route::get('/users', [UserController::class, 'index']);
         Route::post('/users', [UserController::class, 'store']);
         Route::match(['put', 'patch'], '/users/{user}', [UserController::class, 'update']);
+    });
+    Route::middleware(['auth:sanctum', 'role:admin,syndic'])->group(function (): void {
+        Route::get('/users', [UserController::class, 'index']);
     });
     Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('residences', ResidenceController::class);
