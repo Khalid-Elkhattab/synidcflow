@@ -1,0 +1,473 @@
+name: Immeubles
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/residences/{residence_id}/immeubles'
+    metadata:
+      custom: []
+      groupName: Immeubles
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Liste des immeubles d'une résidence, filtrée par rôle."
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      residence_id:
+        custom: []
+        name: residence_id
+        description: 'The ID of the residence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      residence:
+        custom: []
+        name: residence
+        description: 'Identifiant de la résidence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      residence_id: 1
+      residence: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"Immeubles r\u00e9cup\u00e9r\u00e9s avec succ\u00e8s.","data":{"immeubles":[{"id":1,"residence_id":1,"name":"B\u00e2timent A","address":"12 rue des Fleurs","nombre_etages":5,"created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}],"links":{"first":"\/api\/v1\/residences\/1\/immeubles?page=1","last":"\/api\/v1\/residences\/1\/immeubles?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"path":"\/api\/v1\/residences\/1\/immeubles","per_page":15,"to":1,"total":1}}}'
+        headers: []
+        description: "Liste paginée des immeubles d'une résidence."
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/residences/{residence_id}/immeubles'
+    metadata:
+      custom: []
+      groupName: Immeubles
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Crée un immeuble dans la résidence courante.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      residence_id:
+        custom: []
+        name: residence_id
+        description: 'The ID of the residence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      residence:
+        custom: []
+        name: residence
+        description: 'Identifiant de la résidence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      residence_id: 1
+      residence: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: "Nom de l'immeuble."
+        required: true
+        example: 'Bâtiment A'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: "Adresse de l'immeuble."
+        required: false
+        example: '12 rue des Fleurs'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      nombre_etages:
+        custom: []
+        name: nombre_etages
+        description: "Nombre d'étages."
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Bâtiment A'
+      address: '12 rue des Fleurs'
+      nombre_etages: 5
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"success":true,"message":"Immeuble cr\u00e9\u00e9 avec succ\u00e8s.","data":{"immeuble":{"id":1,"residence_id":1,"name":"B\u00e2timent A","address":"12 rue des Fleurs","nombre_etages":5,"created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}}}'
+        headers: []
+        description: 'Immeuble créé.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/residences/{residence_id}/immeubles/{id}'
+    metadata:
+      custom: []
+      groupName: Immeubles
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Affiche un immeuble précis.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      residence_id:
+        custom: []
+        name: residence_id
+        description: 'The ID of the residence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the immeuble.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      residence:
+        custom: []
+        name: residence
+        description: 'Identifiant de la résidence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      immeuble:
+        custom: []
+        name: immeuble
+        description: "Identifiant de l'immeuble."
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      residence_id: 1
+      id: 1
+      residence: 1
+      immeuble: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"Immeuble r\u00e9cup\u00e9r\u00e9 avec succ\u00e8s.","data":{"immeuble":{"id":1,"residence_id":1,"name":"B\u00e2timent A","address":"12 rue des Fleurs","nombre_etages":5,"created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}}}'
+        headers: []
+        description: "Détail d'un immeuble."
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/residences/{residence_id}/immeubles/{id}'
+    metadata:
+      custom: []
+      groupName: Immeubles
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Met à jour un immeuble.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      residence_id:
+        custom: []
+        name: residence_id
+        description: 'The ID of the residence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the immeuble.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      residence:
+        custom: []
+        name: residence
+        description: 'Identifiant de la résidence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      immeuble:
+        custom: []
+        name: immeuble
+        description: "Identifiant de l'immeuble."
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      residence_id: 1
+      id: 1
+      residence: 1
+      immeuble: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: "Nom de l'immeuble."
+        required: false
+        example: 'Bâtiment A'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: "Adresse de l'immeuble."
+        required: false
+        example: '12 rue des Fleurs'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      nombre_etages:
+        custom: []
+        name: nombre_etages
+        description: "Nombre d'étages."
+        required: false
+        example: 5
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Bâtiment A'
+      address: '12 rue des Fleurs'
+      nombre_etages: 5
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"Immeuble mis \u00e0 jour avec succ\u00e8s.","data":{"immeuble":{"id":1,"residence_id":1,"name":"B\u00e2timent A","address":"12 rue des Fleurs","nombre_etages":6,"created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}}}'
+        headers: []
+        description: 'Immeuble mis à jour.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/residences/{residence_id}/immeubles/{id}'
+    metadata:
+      custom: []
+      groupName: Immeubles
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Supprime (doucement) un immeuble.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      residence_id:
+        custom: []
+        name: residence_id
+        description: 'The ID of the residence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the immeuble.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      residence:
+        custom: []
+        name: residence
+        description: 'Identifiant de la résidence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      immeuble:
+        custom: []
+        name: immeuble
+        description: "Identifiant de l'immeuble."
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      residence_id: 1
+      id: 1
+      residence: 1
+      immeuble: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"Immeuble supprim\u00e9 avec succ\u00e8s.","data":null}'
+        headers: []
+        description: 'Immeuble supprimé (soft delete).'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

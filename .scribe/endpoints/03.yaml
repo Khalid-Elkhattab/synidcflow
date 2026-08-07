@@ -1,0 +1,415 @@
+name: Résidences
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/residences
+    metadata:
+      custom: []
+      groupName: Résidences
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Liste filtrée par rôle : admin = toutes, syndic = les siennes,
+        résident = déduites de ses appartements.
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"R\u00e9sidences r\u00e9cup\u00e9r\u00e9es avec succ\u00e8s.","data":{"residences":[{"id":1,"syndic_id":2,"name":"R\u00e9sidence Les Oliviers","address":"12 rue des Fleurs","city":"Casablanca","postal_code":"20000","description":null,"created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}],"links":{"first":"\/api\/v1\/residences?page=1","last":"\/api\/v1\/residences?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"path":"\/api\/v1\/residences","per_page":15,"to":1,"total":1}}}'
+        headers: []
+        description: 'Liste paginée filtrée par rôle.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/residences
+    metadata:
+      custom: []
+      groupName: Résidences
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Syndic : création pour lui-même. Admin : création pour un syndic choisi.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'Nom de la résidence.'
+        required: true
+        example: 'Résidence Les Oliviers'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: Adresse.
+        required: true
+        example: '12 rue des Fleurs'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: Ville.
+        required: true
+        example: Casablanca
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      postal_code:
+        custom: []
+        name: postal_code
+        description: 'Code postal.'
+        required: false
+        example: '20000'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: Description.
+        required: false
+        example: 'Résidence principale'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      syndic_id:
+        custom: []
+        name: syndic_id
+        description: "Identifiant du syndic propriétaire (uniquement si l'appelant est un administrateur)."
+        required: false
+        example: 2
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Résidence Les Oliviers'
+      address: '12 rue des Fleurs'
+      city: Casablanca
+      postal_code: '20000'
+      description: 'Résidence principale'
+      syndic_id: 2
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"success":true,"message":"R\u00e9sidence cr\u00e9\u00e9e avec succ\u00e8s.","data":{"residence":{"id":1,"syndic_id":2,"name":"R\u00e9sidence Les Oliviers","address":"12 rue des Fleurs","city":"Casablanca","postal_code":"20000","description":null,"created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}}}'
+        headers: []
+        description: 'Résidence créée. Le syndic devient automatiquement propriétaire pour un compte syndic.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/residences/{id}'
+    metadata:
+      custom: []
+      groupName: Résidences
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Affiche une résidence précise.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the residence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      residence:
+        custom: []
+        name: residence
+        description: 'Identifiant de la résidence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      residence: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"R\u00e9sidence r\u00e9cup\u00e9r\u00e9e avec succ\u00e8s.","data":{"residence":{"id":1,"syndic_id":2,"name":"R\u00e9sidence Les Oliviers","address":"12 rue des Fleurs","city":"Casablanca","postal_code":"20000","description":null,"created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}}}'
+        headers: []
+        description: "Détail d'une résidence."
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/residences/{id}'
+    metadata:
+      custom: []
+      groupName: Résidences
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Met à jour une résidence.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the residence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      residence:
+        custom: []
+        name: residence
+        description: 'Identifiant de la résidence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      residence: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        custom: []
+        name: name
+        description: 'Nom de la résidence.'
+        required: false
+        example: 'Résidence Les Oliviers'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      address:
+        custom: []
+        name: address
+        description: Adresse.
+        required: false
+        example: '12 rue des Fleurs'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      city:
+        custom: []
+        name: city
+        description: Ville.
+        required: false
+        example: Casablanca
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      postal_code:
+        custom: []
+        name: postal_code
+        description: 'Code postal.'
+        required: false
+        example: '20000'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: Description.
+        required: false
+        example: 'Résidence principale'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      name: 'Résidence Les Oliviers'
+      address: '12 rue des Fleurs'
+      city: Casablanca
+      postal_code: '20000'
+      description: 'Résidence principale'
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"R\u00e9sidence mise \u00e0 jour avec succ\u00e8s.","data":{"residence":{"id":1,"syndic_id":2,"name":"R\u00e9sidence Les Oliviers","address":"12 rue des Fleurs","city":"Casablanca","postal_code":"20000","description":null,"created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}}}'
+        headers: []
+        description: 'Résidence mise à jour.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/residences/{id}'
+    metadata:
+      custom: []
+      groupName: Résidences
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Supprime (doucement) une résidence.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the residence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      residence:
+        custom: []
+        name: residence
+        description: 'Identifiant de la résidence.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      residence: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"R\u00e9sidence supprim\u00e9e avec succ\u00e8s.","data":null}'
+        headers: []
+        description: 'Résidence supprimée (soft delete).'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
