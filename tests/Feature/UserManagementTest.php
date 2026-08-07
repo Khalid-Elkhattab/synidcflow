@@ -12,10 +12,12 @@ describe('index', function () {
         $this->getJson('/api/v1/users')->assertUnauthorized();
     });
 
-    test('un syndic reçoit 403', function () {
-        Sanctum::actingAs(User::factory()->asSyndic()->create());
+    test('un syndic voit la liste des utilisateurs', function () {
+        $syndic = User::factory()->asSyndic()->create();
 
-        $this->getJson('/api/v1/users')->assertForbidden();
+        Sanctum::actingAs($syndic);
+
+        $this->getJson('/api/v1/users')->assertOk();
     });
 
     test('un résident reçoit 403', function () {
