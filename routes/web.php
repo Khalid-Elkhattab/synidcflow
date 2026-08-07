@@ -8,4 +8,4 @@ Route::get('/', function () {
 
 Route::get('/{any}', function () {
     return view('welcome');
-})->where('any', '^(?!api/|_boost/|storage/|telescope|horizon).*');
+})->where('any', '^(?!api/|_boost/|storage/|telescope|horizon|docs($|\.|/)).*');

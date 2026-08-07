@@ -1,0 +1,241 @@
+name: 'Audits IA'
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: 'api/v1/reclamations/{reclamation_id}/analyser'
+    metadata:
+      custom: []
+      groupName: 'Audits IA'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Déclenche l'analyse IA asynchrone d'une réclamation."
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      reclamation_id:
+        custom: []
+        name: reclamation_id
+        description: 'The ID of the reclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      reclamation:
+        custom: []
+        name: reclamation
+        description: 'Identifiant de la réclamation à analyser.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      reclamation_id: 1
+      reclamation: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 202
+        content: '{"success":true,"message":"Analyse de la r\u00e9clamation lanc\u00e9e avec succ\u00e8s.","data":null}'
+        headers: []
+        description: 'Analyse lancée (traitement asynchrone via la queue).'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/reclamations/{reclamation_id}/audits'
+    metadata:
+      custom: []
+      groupName: 'Audits IA'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Liste des audits d'une réclamation précisée (syndic propriétaire
+        ou admin uniquement).
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      reclamation_id:
+        custom: []
+        name: reclamation_id
+        description: 'The ID of the reclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      reclamation:
+        custom: []
+        name: reclamation
+        description: 'Identifiant de la réclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      reclamation_id: 1
+      reclamation: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"Audits de la r\u00e9clamation r\u00e9cup\u00e9r\u00e9s avec succ\u00e8s.","data":{"audits":[{"id":1,"reclamation_id":1,"charges_snapshot":{"total":"120.50","statut":"paid"},"resultat":{"resume":"Fuite signal\u00e9e","categorie":"plomberie","priorite":"haute"},"decision":"review","statut":"completed","modele_ia":"llama-3.1-8b-instant","traite_at":"2026-08-02T10:00:00.000000Z","conversation":{"id":1},"created_at":"2026-08-02T10:00:00.000000Z"}]}}'
+        headers: []
+        description: "Liste paginée des audits d'une réclamation (une réclamation peut être analysée plusieurs fois)."
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/audits
+    metadata:
+      custom: []
+      groupName: 'Audits IA'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Liste des audits visible par le syndic propriétaire ou l'admin."
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"Audits r\u00e9cup\u00e9r\u00e9s avec succ\u00e8s.","data":{"audits":[{"id":1,"reclamation_id":1,"charges_snapshot":{"total":"120.50","statut":"paid"},"resultat":{"resume":"Fuite signal\u00e9e","categorie":"plomberie","priorite":"haute"},"decision":"review","statut":"completed","modele_ia":"llama-3.1-8b-instant","traite_at":"2026-08-02T10:00:00.000000Z","conversation":{"id":1},"created_at":"2026-08-02T10:00:00.000000Z"}],"links":{"first":"\/api\/v1\/audits?page=1","last":"\/api\/v1\/audits?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"path":"\/api\/v1\/audits","per_page":15,"to":1,"total":1}}}'
+        headers: []
+        description: 'Liste paginée des audits (syndic propriétaire ou admin uniquement).'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/audits/{id}'
+    metadata:
+      custom: []
+      groupName: 'Audits IA'
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Détail d'un audit (syndic propriétaire ou admin uniquement)."
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the audit.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      audit:
+        custom: []
+        name: audit
+        description: "Identifiant de l'audit."
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      audit: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"Audit r\u00e9cup\u00e9r\u00e9 avec succ\u00e8s.","data":{"audit":{"id":1,"reclamation_id":1,"charges_snapshot":{"total":"120.50","statut":"paid"},"resultat":{"resume":"Fuite signal\u00e9e","categorie":"plomberie","priorite":"haute"},"decision":"review","statut":"completed","modele_ia":"llama-3.1-8b-instant","traite_at":"2026-08-02T10:00:00.000000Z","conversation":{"id":1},"created_at":"2026-08-02T10:00:00.000000Z"}}}'
+        headers: []
+        description: "Détail d'un audit, avec sa conversation IA."
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

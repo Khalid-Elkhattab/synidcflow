@@ -1,0 +1,353 @@
+name: Réclamations
+description: ''
+endpoints:
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: api/v1/reclamations
+    metadata:
+      custom: []
+      groupName: Réclamations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: |-
+        Liste filtrée par rôle : résident = les siennes, syndic = celles de
+        ses résidences, admin = toutes.
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"R\u00e9clamations r\u00e9cup\u00e9r\u00e9es avec succ\u00e8s.","data":{"reclamations":[{"id":1,"resident_id":3,"appartement_id":1,"titre":"Fuite d''eau","description":"Fuite au niveau de la salle de bain.","statut":"submitted","priorite":"high","created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}],"links":{"first":"\/api\/v1\/reclamations?page=1","last":"\/api\/v1\/reclamations?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"path":"\/api\/v1\/reclamations","per_page":15,"to":1,"total":1}}}'
+        headers: []
+        description: 'Liste paginée des réclamations visibles selon le rôle.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - POST
+    uri: api/v1/reclamations
+    metadata:
+      custom: []
+      groupName: Réclamations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Crée une réclamation pour l'un des appartements du résident."
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      appartement_id:
+        custom: []
+        name: appartement_id
+        description: "Identifiant de l'appartement (doit être affecté à l'utilisateur)."
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      titre:
+        custom: []
+        name: titre
+        description: 'Titre de la réclamation.'
+        required: true
+        example: "Fuite d'eau"
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      description:
+        custom: []
+        name: description
+        description: 'Description détaillée.'
+        required: true
+        example: 'Fuite au niveau de la salle de bain.'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      priorite:
+        custom: []
+        name: priorite
+        description: 'Priorité de la réclamation.'
+        required: false
+        example: high
+        type: string
+        enumValues:
+          - low
+          - medium
+          - high
+          - urgent
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      appartement_id: 1
+      titre: "Fuite d'eau"
+      description: 'Fuite au niveau de la salle de bain.'
+      priorite: high
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 201
+        content: '{"success":true,"message":"R\u00e9clamation d\u00e9pos\u00e9e avec succ\u00e8s.","data":{"reclamation":{"id":1,"resident_id":3,"appartement_id":1,"titre":"Fuite d''eau","description":"Fuite au niveau de la salle de bain.","statut":"submitted","priorite":"high","created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}}}'
+        headers: []
+        description: 'Réclamation créée avec le statut `submitted`.'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - GET
+    uri: 'api/v1/reclamations/{id}'
+    metadata:
+      custom: []
+      groupName: Réclamations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Affiche une réclamation précise.'
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the reclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      reclamation:
+        custom: []
+        name: reclamation
+        description: 'Identifiant de la réclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      reclamation: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"R\u00e9clamation r\u00e9cup\u00e9r\u00e9e avec succ\u00e8s.","data":{"reclamation":{"id":1,"resident_id":3,"appartement_id":1,"titre":"Fuite d''eau","description":"Fuite au niveau de la salle de bain.","statut":"submitted","priorite":"high","created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-01T10:00:00.000000Z"}}}'
+        headers: []
+        description: "Détail d'une réclamation."
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/reclamations/{id}'
+    metadata:
+      custom: []
+      groupName: Réclamations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Traitement par le syndic ou l'admin : évolution du statut."
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the reclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      reclamation:
+        custom: []
+        name: reclamation
+        description: 'Identifiant de la réclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      reclamation: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      statut:
+        custom: []
+        name: statut
+        description: 'Nouveau statut de la réclamation.'
+        required: true
+        example: under_review
+        type: string
+        enumValues:
+          - submitted
+          - under_review
+          - accepted
+          - rejected
+          - resolved
+          - closed
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanBodyParameters:
+      statut: under_review
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"R\u00e9clamation mise \u00e0 jour avec succ\u00e8s.","data":{"reclamation":{"id":1,"resident_id":3,"appartement_id":1,"titre":"Fuite d''eau","description":"Fuite au niveau de la salle de bain.","statut":"under_review","priorite":"high","created_at":"2026-08-01T10:00:00.000000Z","updated_at":"2026-08-02T10:00:00.000000Z"}}}'
+        headers: []
+        description: 'Réclamation traitée (statut mis à jour).'
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null
+  -
+    custom: []
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/reclamations/{id}'
+    metadata:
+      custom: []
+      groupName: Réclamations
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: "Suppression réservée à l'admin."
+      description: ''
+      authenticated: true
+      deprecated: false
+    headers:
+      Authorization: 'Bearer {VOTRE_TOKEN}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        custom: []
+        name: id
+        description: 'The ID of the reclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+      reclamation:
+        custom: []
+        name: reclamation
+        description: 'Identifiant de la réclamation.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        deprecated: false
+    cleanUrlParameters:
+      id: 1
+      reclamation: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        custom: []
+        status: 200
+        content: '{"success":true,"message":"R\u00e9clamation supprim\u00e9e avec succ\u00e8s.","data":null}'
+        headers: []
+        description: "Réclamation supprimée (soft delete). Réservé à l'administrateur."
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 6g43cv8PD1aE5beadkZfhV6'
+    controller: null
+    method: null
+    route: null

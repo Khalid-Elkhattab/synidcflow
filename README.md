@@ -1,58 +1,133 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SyndicFlow
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Plateforme web de gestion de syndic (copropriété), enrichie par un agent IA qui analyse les réclamations des résidents.
 
-## About Laravel
+Projet fil rouge (académique) — **Laravel 13 API + React SPA + MySQL**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Fonctionnalités
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Authentification & rôles** : inscription libre (rôle résident), connexion, déconnexion via Sanctum. Trois rôles : `admin`, `syndic`, `resident`.
+- **Gestion du patrimoine** : hiérarchie `Résidence → Immeuble → Appartement`, avec affectation/désaffectation d'un résident à un appartement.
+- **Gestion des utilisateurs** : un administrateur crée des comptes pour n'importe quel rôle et modifie le rôle d'un compte existant ; un syndic récupère la liste des utilisateurs pour affecter un appartement.
+- **Charges** : création, échéance, statut (`pending` / `paid` / `overdue`), déclaration manuelle du paiement.
+- **Reçus** : téléversement d'un reçu scanné (JPG/PNG) sur une charge payée, consultation et téléchargement protégés.
+- **Réclamations** : un résident dépose une réclamation pour l'un de ses appartements ; un syndic suit et traite les réclamations de ses résidences.
+- **Analyse IA (audits)** : un agent IA (via Laravel AI / Groq) analyse une réclamation avec un snapshot figé des charges de l'appartement, produit un résultat structuré (`resume`, `decision`, `statut`) et l'historise dans des audits traçables.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Stack technique
 
-## Learning Laravel
+| Couche | Technologie |
+|---|---|
+| Backend | Laravel 13, API REST versionnée `/api/v1`, Sanctum, Policies, Form Requests, API Resources, Enums, Jobs asynchrones |
+| Frontend SPA | React 19 + Vite, Tailwind CSS 4, React Router, Axios |
+| Intelligence artificielle | Laravel AI (fournisseur Groq, modèle configurable) |
+| Base de données | MySQL (production) — SQLite par défaut dans `.env.example` |
+| Qualité | Pest (tests), Laravel Pint (formatage), Laravel AI/halo Teams non liés |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Prérequis
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP **8.3**+
+- Composer 2
+- Node.js (pour le build frontend)
+- MySQL (ou SQLite en local)
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Installation
 
 ```bash
-composer require laravel/boost --dev
+# 1. Cloner et installer les dépendances
+composer install
+npm install
 
-php artisan boost:install
+# 2. Configuration
+cp .env.example .env
+php artisan key:generate
+
+# 3. Bases de données
+php artisan migrate --seed
+
+# 4. Frontend
+npm run build          # production
+# ou pendant le dev : npm run dev
+
+# 5. Lancer le serveur
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Le démarrage simultané (serveur + queue + Vite) est fourni par :
 
-## Contributing
+```bash
+composer run dev
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Configuration de l'IA (optionnelle pour l'analyse des réclamations)
 
-## Code of Conduct
+L'agent IA est piloté par les variables d'environnement suivantes (voir `.env`) :
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+GROQ_API_KEY=clé_du_provider
+GROQ_MODEL=modèle_groq
+AI_PROVIDER=groq
+```
 
-## Security Vulnerabilities
+La clé API ne doit jamais être commitée (`.env` est ignoré par `.gitignore`). S'il n'y a pas de fournisseur configuration, les analyses renverront une erreur, ce qui ne bloque pas le traitement des réclamations.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Documentation API
 
-## License
+La documentation de l'API est générée avec [Scribe](https://scribe.knuckles.wtf) et accessible sur :
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+http://localhost:8000/docs
+```
+
+Régénérer la doc (à chaque modification des contrôleurs) :
+
+```bash
+composer docs
+# équivalent : php artisan scribe:generate
+```
+
+La documentation couvre : authentification, utilisateurs, résidences, immeubles, appartements (+ affectation), charges (+ paiement), reçus (upload/téléchargement), réclamations et audits IA — avec exemple de réponses, jetons d'authentification et tester intégré ("Try It Out").
+
+## Tests et qualité
+
+```bash
+# Toute la suite de tests (Pest)
+php artisan test --compact
+
+# Ou uniquement un fichier
+php artisan test --compact --filter=ResidenceTest
+
+# Formatage du code (Laravel Pint)
+composer pint        # équivalent : vendor/bin/pint --dirty --format agent
+vendor/bin/pint
+```
+
+## Arborescence
+
+```
+app/
+  Agents/          Agent IA (analyses des réclamations)
+  Models/          Élites Eloquent (modèles)
+  Http/Controllers/Api/V1/   Contrôleurs de l'API
+  Http/Requests/Api/V1/      Form Requests (validation + autorisation)
+  Http/Resources/  API Resources (formats de réponses)
+  Policies/        Policies d'autorisation
+  Enums/           Rôles et statuts
+  Services/        Logique métier (détachée des contrôleurs)
+routes/
+  api.php          Routes de l'API (préfixe /api/v1)
+  web.php          Catch-all de la SPA React
+resources/js/      Application React
+docs/              Documentation du projet (contexte, suivi, diagrammes)
+tests/             Suites Feature et Unit (Pest)
+```
+
+## Documentation du projet
+
+- [Contexte projet complet](docs/SyndicFlow_Contexte_Projet_Complet.md) : cahier des charges, modèle de données, règles d'autorisation.
+- [Suivi de réalisation](docs/Suivi_Projet_SyndicFlow.md) : étape actuelle et état du livrable.
+- [User stories](projectcontext.md) : récits d'utilisation par rôle.
+
+## Licence
+
+Projet à vocation académique. Licence MIT.
